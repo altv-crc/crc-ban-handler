@@ -1,14 +1,10 @@
 import * as alt from 'alt-server';
 import * as crc from '@stuyk/cross-resource-cache';
 
+import { Account } from 'alt-crc';
+
 // Initialize Database
 crc.database.onReady(() => {});
-
-interface Account {
-    _id?: string;
-    banned: boolean;
-    reason: string;
-}
 
 const accountMap: { [id: string]: string } = {};
 
@@ -65,4 +61,3 @@ alt.on('crc-discord-login-finish', checkAccountStatus);
 alt.on('playerDisconnect', (player: alt.Player) => {
     delete accountMap[player.id];
 });
-
